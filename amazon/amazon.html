@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Clone</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: #232f3e;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    header .search-bar {
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    header .search-bar input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    header .cart {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1500x400') no-repeat center center/cover;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+    }
+
+    /* Products Section */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .product:hover {
+      transform: scale(1.05);
+    }
+
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-details {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .product-details h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .product-details p {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .product-details button {
+      background-color: #ff9900;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .product-details button:hover {
+      background-color: #e68a00;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #232f3e;
+      color: white;
+      text-align: center;
+      padding: 10px 20px;
+      margin-top: 20px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      header .search-bar {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Amazon Clone</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products...">
+    </div>
+    <div class="cart">Cart (0)</div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Welcome to Amazon Clone</h1>
+  </div>
+
+  <!-- Products Section -->
+  <div class="products" id="products">
+    <!-- Products will be inserted here by JavaScript -->
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Amazon Clone. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Products Array
+    const products = [
+      { id: 1, name: "Laptop", price: 799, img: "https://via.placeholder.com/300x200" },
+      { id: 2, name: "Smartphone", price: 599, img: "https://via.placeholder.com/300x200" },
+      { id: 3, name: "Headphones", price: 199, img: "https://via.placeholder.com/300x200" },
+      { id: 4, name: "Camera", price: 899, img: "https://via.placeholder.com/300x200" },
+      { id: 5, name: "Watch", price: 149, img: "https://via.placeholder.com/300x200" },
+      { id: 6, name: "Shoes", price: 120, img: "https://via.placeholder.com/300x200" },
+    ];
+
+    // Render Products
+    const productsContainer = document.getElementById('products');
+    const cart = [];
+
+    function renderProducts() {
+      productsContainer.innerHTML = '';
+      products.forEach(product => {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('product');
+        productDiv.innerHTML = `
+          <img src="${product.img}" alt="${product.name}">
+          <div class="product-details">
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
+            <button onclick="addToCart(${product.id})">Add to Cart</button>
+          </div>
+        `;
+        productsContainer.appendChild(productDiv);
+      });
+    }
+
+    // Add to Cart
+    function addToCart(id) {
+      const product = products.find(p => p.id === id);
+      cart.push(product);
+      updateCartCount();
+      alert(`${product.name} has been added to your cart!`);
+    }
+
+    // Update Cart Count
+    function updateCartCount() {
+      document.querySelector('.cart').textContent = `Cart (${cart.length})`;
+    }
+
+    // Initialize
+    renderProducts();
+  </script>
+</body>
+</html>
