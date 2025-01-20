@@ -1,8 +1,3 @@
-
-const cards = document.querySelectorAll('.card');
-
-cards.forEach(card => {
-    card.addEventListener('click', () => {
-        alert(`Playing ${card.querySelector('h3').textContent}`);
-    });
-});
+//all condition true than it's true.
+//if one is false then all is false.
+//&& || !
